@@ -12,10 +12,9 @@ def test_bucket_rate_limiter_limits_per_bucket(backend, rate_limiter_backends):
     limiter = BucketRateLimiter(backend, "sequential-test", limit=2)
     calls = 0
 
-    for _ in range(2):
+    for delay in range(2):
         # And I wait until the next second starts
-        now = time.time()
-        time.sleep(1 - (now - int(now)))
+        time.sleep(delay)
 
         # And I acquire it multiple times sequentially
         for _ in range(8):
